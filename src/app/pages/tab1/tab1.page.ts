@@ -17,7 +17,7 @@ export class Tab1Page implements OnInit {
   constructor(private newsService:NewsService) {}
 
   ngOnInit(){
-    this.newsService.getTopHeadLines(this.page).subscribe((resp) => {
+    this.newsService.getTopHeadLines(this.page,'business').subscribe((resp) => {
       console.log(resp.articles);
 
       this.articles = resp.articles;
@@ -27,7 +27,7 @@ export class Tab1Page implements OnInit {
   loadData(event:any){
     this.page += 1
 
-    this.newsService.getTopHeadLines(this.page).subscribe((resp) => {
+    this.newsService.getTopHeadLines(this.page,'business').subscribe((resp) => {
 
       if(resp.articles.length === 0){
         this.infiniteScroll.disabled = true;
