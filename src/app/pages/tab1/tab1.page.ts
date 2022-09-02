@@ -29,6 +29,11 @@ export class Tab1Page implements OnInit {
 
     this.newsService.getTopHeadLines(this.page).subscribe((resp) => {
 
+      if(resp.articles.length === 0){
+        this.infiniteScroll.disabled = true;
+        return;
+      }
+
       this.articles = [...this.articles,...resp.articles];
       this.infiniteScroll.complete()
     })
