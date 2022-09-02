@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Article } from 'src/app/interfaces';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
+// TODO: TENGO UN ERROR CON EL INAPPBROWSER, NO ME AGARRA EL PLUGIN PARA ABRIR VENTANAS EXTERNAS DE FORMA NATIVA!
+
 
 @Component({
   selector: 'app-article',
