@@ -30,7 +30,8 @@ export class Tab2Page implements OnInit{
 
   segmentChanged(event:any){
 
-    this.selectedCategory = event.detail.value;
+  this.infiniteScroll.disabled = false;
+  this.selectedCategory = event.detail.value;
 
   this.newsService.getTopHeadLines(this.page, this.selectedCategory).subscribe((resp) => {
     console.log(resp.articles);

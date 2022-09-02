@@ -15,4 +15,8 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {}
 
+  openArticle(){
+    window.open(this.article.url, '_blank')
+  }
+
 }
