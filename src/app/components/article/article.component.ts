@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Article } from 'src/app/interfaces';
 // import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { Share } from "@capacitor/share"
 
 // TODO: TENGO UN ERROR CON EL INAPPBROWSER, NO ME AGARRA EL PLUGIN PARA ABRIR VENTANAS EXTERNAS DE FORMA NATIVA!
 
@@ -35,7 +36,7 @@ export class ArticleComponent implements OnInit {
       {
         text: 'Share',
         icon: 'share-outline',
-        handler: () => this.onOpenArticle()
+        handler: () => this.shareArticle()
       },
       {
         text: 'Favorites',
@@ -53,8 +54,12 @@ export class ArticleComponent implements OnInit {
      await actionSheet.present()
   }
 
-  onOpenArticle(){
-    console.log('share article')
+  async shareArticle(){
+    await Share.share({
+      title: this.article.title,
+      text: this.article.source.name,
+      url: this.article.url
+    })
   }
 
   onToggleFavorite(){
