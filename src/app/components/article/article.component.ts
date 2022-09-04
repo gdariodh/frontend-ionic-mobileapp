@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
 import { Article } from 'src/app/interfaces';
-import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+// import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 // TODO: TENGO UN ERROR CON EL INAPPBROWSER, NO ME AGARRA EL PLUGIN PARA ABRIR VENTANAS EXTERNAS DE FORMA NATIVA!
 
@@ -15,16 +16,49 @@ export class ArticleComponent implements OnInit {
   @Input() article: Article;
   @Input() index:number;
 
-  constructor(private iab: InAppBrowser) { }
+  constructor(/**private iab: InAppBrowser **/ private actionSheetCtrl: ActionSheetController ) { }
 
   ngOnInit() {}
 
   openArticle(){
     window.open(this.article.url, '_blank')
 
-    const browser = this.iab.create(this.article.url);
+    // const browser = this.iab.create(this.article.url);
 
-    browser.show()
+    // browser.show()
+  }
+
+  async openMenu(){
+  const actionSheet = await this.actionSheetCtrl.create({
+    header: 'options',
+    buttons: [
+      {
+        text: 'Share',
+        icon: 'share-outline',
+        handler: () => this.onOpenArticle()
+      },
+      {
+        text: 'Favorites',
+        icon: 'heart-outline',
+        handler: () => this.onToggleFavorite()
+      },
+      {
+        text: 'Cancel',
+        icon: 'close-outline',
+        role: 'cancel'
+      }
+    ]
+  })
+
+     await actionSheet.present()
+  }
+
+  onOpenArticle(){
+    console.log('share article')
+  }
+
+  onToggleFavorite(){
+    console.log('onToggle')
   }
 
 }
