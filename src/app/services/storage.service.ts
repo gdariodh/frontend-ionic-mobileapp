@@ -30,7 +30,6 @@ export class StorageService {
    const exist = this._localArticles.find(a => a.title === article.title)
 
    if(exist){
-    console.log('aca')
     this._localArticles = this._localArticles.filter(a => a.title !== article.title);
    }else{
     this._localArticles = [article, ...this._localArticles];
@@ -47,5 +46,9 @@ export class StorageService {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  articlesInFavorites(article: Article){
+   return !!this._localArticles.find(a => a.title === article.title)
   }
 }
