@@ -3,6 +3,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { Article } from 'src/app/interfaces';
 // import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { Share } from "@capacitor/share"
+import { StorageService } from 'src/app/services/storage.service';
 
 // TODO: TENGO UN ERROR CON EL INAPPBROWSER, NO ME AGARRA EL PLUGIN PARA ABRIR VENTANAS EXTERNAS DE FORMA NATIVA!
 
@@ -17,7 +18,11 @@ export class ArticleComponent implements OnInit {
   @Input() article: Article;
   @Input() index:number;
 
-  constructor(/**private iab: InAppBrowser **/ private actionSheetCtrl: ActionSheetController ) { }
+  constructor(
+    /**private iab: InAppBrowser, **/
+    private actionSheetCtrl: ActionSheetController,
+    private storageService: StorageService
+    ) { }
 
   ngOnInit() {}
 
@@ -62,8 +67,8 @@ export class ArticleComponent implements OnInit {
     })
   }
 
-  onToggleFavorite(){
-    console.log('onToggle')
+ async onToggleFavorite(){
+    await this.storageService.saveOrRemoveArticle(this.article)
   }
 
 }
