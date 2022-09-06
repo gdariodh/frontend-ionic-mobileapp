@@ -10,14 +10,19 @@ export class StorageService {
   private _storage: Storage | null = null;
   private _localArticles:Article[] = [];
 
-
   constructor(private storage: Storage) {
     this.init();
    }
 
+   get getLocalArticles(){
+    return [...this._localArticles]
+  }
+
    async init() {
     const storage = await this.storage.create();
     this._storage = storage;
+    await this.loadFavorites()
+
   }
 
   async saveOrRemoveArticle(article: Article){
@@ -32,5 +37,15 @@ export class StorageService {
    }
 
    this._storage.set("articles",this._localArticles)
+  }
+
+  async loadFavorites(){
+    try {
+      const articles = await this._storage.get("articles");
+      console.log({articles})
+      this._localArticles = articles;
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
