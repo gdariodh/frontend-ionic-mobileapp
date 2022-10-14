@@ -17,24 +17,27 @@ export class Tab1Page implements OnInit {
   constructor(private newsService:NewsService) {}
 
   ngOnInit(){
-    this.newsService.getTopHeadLines(this.page,'business').subscribe((resp) => {
-      console.log(resp.articles);
+    this.newsService.getTopHeadLines(this.page).subscribe((resp) => {
 
-      this.articles = resp.articles;
+     console.log({resp})
+
+      console.log(resp.products);
+
+      this.articles = resp.products;
     })
   }
 
   loadData(event:any){
     this.page += 1
 
-    this.newsService.getTopHeadLines(this.page,'business').subscribe((resp) => {
+    this.newsService.getTopHeadLines(this.page).subscribe((resp) => {
 
-      if(resp.articles.length === 0){
+      if(resp.products.length === 0){
         this.infiniteScroll.disabled = true;
         return;
       }
 
-      this.articles = [...this.articles,...resp.articles];
+      this.articles = [...this.articles,...resp.products];
       this.infiniteScroll.complete()
     })
   }

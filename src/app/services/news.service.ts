@@ -13,12 +13,9 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  getTopHeadLines(page: number, category: string ){
-    return this.http.get<NewsResponse>(`${url}/top-headlines`,{
+  getTopHeadLines(page: number){
+    return this.http.get<NewsResponse>(`${url}/product/paging`,{
       params: {
-        apiKey,
-        country: "us",
-        category,
         page
       }
     })
