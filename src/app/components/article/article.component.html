@@ -1,10 +1,11 @@
 <ion-card>
   <ion-img [src]="article.image" (click)="openArticle()"></ion-img>
 
-  <ion-card-title class="ion-padding-horizontal ion-margin">
+  <ion-card-title class="ion-padding-horizontal ">
     <p>{{ article.name }}</p>
   </ion-card-title>
   <ion-card-content>
     <p>{{ article.description }}</p>
+    <p>${{article.price}}</p>
   </ion-card-content>
 </ion-card>
